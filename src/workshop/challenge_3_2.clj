@@ -41,7 +41,8 @@
 
 ;; <<< BEGIN FILL ME IN >>>
 
-
+(defn split-sentence [{:keys [sentence]}]
+  (map #(assoc {} :word %) (clojure.string/split sentence #" ")))
 
 ;; <<< END FILL ME IN >>>
 

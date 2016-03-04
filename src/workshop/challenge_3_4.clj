@@ -23,6 +23,14 @@
 
       ;; <<< BEGIN FILL ME IN PART 1 >>>
 
+      {:onyx/name :echo-segments
+       :onyx/fn :workshop.challenge-3-4/echo-segments
+       :onyx/type :function
+       :onyx/bulk? true
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/doc "bulk task with side effect (write to db, for example), no return need"}
+
       ;; <<< END FILL ME IN PART 1 >>>
 
       {:onyx/name :write-segments
@@ -37,6 +45,9 @@
 ;;; Functions ;;;
 
 ;; <<< BEGIN FILL ME IN PART 2 >>>
+
+(defn echo-segments [segment]
+  (println segment))
 
 ;; <<< END FILL ME IN PART 2 >>>
 
