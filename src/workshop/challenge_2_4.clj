@@ -23,6 +23,14 @@
 
       ;; <<< BEGIN FILL ME IN >>>
 
+      {:onyx/name :identity
+       :onyx/fn :clojure.core/identity
+       :onyx/type :function
+       :onyx/max-peers 3
+       :onyx/batch-size batch-size
+       :onyx/batch-timeout batch-timeout
+       :onyx/doc "try bound max peers"}
+
       ;; <<< END FILL ME IN >>>
 
       {:onyx/name :write-segments
