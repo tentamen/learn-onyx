@@ -51,7 +51,14 @@
 ;; <<< BEGIN FILL ME IN PART 1 >>>
 
 (def windows
-  [])
+  [{:window/id :collect-segments
+ :window/task :bucket-page-views
+ :window/type :sliding
+ :window/aggregation [:onyx.windowing.aggregation/average :bytes-sent]
+ :window/window-key :event-time
+ :window/range [1 :hour]
+ :window/slide [30 :minutes]
+ :window/doc "Adds the :bytes-sent key in all segments in 2 hour fixed windows"}])
 
 ;; <<< END FILL ME IN PART 1 >>>
 
@@ -68,6 +75,8 @@
 
 (defn deliver-promise! [event window trigger {:keys [window-id lower-bound upper-bound]} state]
   ;; <<< BEGIN FILL ME IN PART 2 >>>
-
+(let [lower (java.util.Date. lower-bound)
+        upper (java.util.Date. upper-bound)]
+    (swap! fired-window-state assoc [lower upper] state))
   ;; <<< END FILL ME IN PART 2 >>>
   )
