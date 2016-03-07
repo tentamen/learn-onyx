@@ -73,7 +73,16 @@
 ;;; Flow conditions ;;;
 
 ;; <<< BEGIN FILL ME IN >>>
+(defn admin? [event old-segment new-segment all-new-segments]
+  (= :admin (:status new-segment)))
 
-(def flow-conditions)
+(defn user? [event old-segment new-segment all-new-segments]
+  (= :user (:status new-segment)))
+
+(def flow-conditions
+  [{:flow/from :identity
+    :flow/to [:write-segments]
+    :flow/predicate [:or :workshop.challenge-5-2/admin? :workshop.challenge-5-2/user?]
+    :flow/doc "Route to :admins-output if :status in this segment is admin or user"}])
 
 ;; <<< END FILL ME IN >>>

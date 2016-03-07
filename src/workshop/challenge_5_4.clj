@@ -93,6 +93,20 @@
 
 ;; <<< BEGIN FILL ME IN >>>
 
-(def flow-conditions)
+(defn child? [event old-segment new-segment all-new-segments]
+  (< (:age new-segment) 18))
+
+(def flow-conditions
+  [{:flow/from :identity
+    :flow/to [:children]
+    :flow/predicate :workshop.challenge-5-4/child?
+    :flow/exclude-keys [:age]
+    :flow/doc "Route to :children if :age in this segment < 18"}
+
+   {:flow/from :identity
+    :flow/to [:adults]
+    :flow/predicate [:not :workshop.challenge-5-4/child?]
+    :flow/exclude-keys [:age]
+    :flow/doc "Route to :adults if :age in this segment >= 18"}])
 
 ;; <<< END FILL ME IN >>>

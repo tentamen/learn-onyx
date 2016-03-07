@@ -81,6 +81,18 @@
 
 ;; <<< BEGIN FILL ME IN >>>
 
-(def flow-conditions)
+(defn handle-exception? [event old e all-new]
+  (= (:type (ex-data e)) :guest))
+
+(defn transform-exception [event segment e]
+    (assoc (:segment (ex-data e)) :error "Insufficient access level"))
+
+(def flow-conditions
+  [{:flow/from :process-user
+    :flow/to [:write-segments]
+    :flow/short-circuit? true
+    :flow/thrown-exception? true
+    :flow/predicate :workshop.challenge-5-3/handle-exception?
+    :flow/post-transform :workshop.challenge-5-3/transform-exception}])
 
 ;; <<< END FILL ME IN >>>
